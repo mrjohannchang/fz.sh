@@ -15,7 +15,7 @@ Currently supports Bash and zsh.
 
 ## Demo
 
-Watch video demo [here](https://youtu.be/GcVC1f2fdXk).
+Watch video demo [here](https://youtu.be/YRJrAUz0MiU).
 
 ![gif-demo](fz-demo.gif)
 
