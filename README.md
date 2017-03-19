@@ -14,9 +14,9 @@ Currently supports Bash and zsh.
 
 ## Demo
 
-![](fz-demo.gif)
+Watch video demo [here](https://youtu.be/GcVC1f2fdXk).
 
-Watch video [here](https://youtu.be/GcVC1f2fdXk).
+![gif-demo](fz-demo.gif)
 
 ## Installation
 
@@ -72,9 +72,12 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 
 ## Usage
 
-- ctrl-n/ctrl-p, ctrl-j/ctrl-k, tab/shift-tab for moving down and up.
-    Check fzf’s [doc](https://github.com/junegunn/fzf#search-syntax) for the search syntaxes.
-- The function of fz is pretty much like what it is of [z](https://github.com/rupa/z).
+- `tab`/`shift-tab`, `ctrl-n`/`ctrl-p`, `ctrl-j`/`ctrl-k`,
+    for next and previous item. `Enter` for selection.
+    Check fzf’s [doc](https://github.com/junegunn/fzf#search-syntax)
+    for the search syntaxes.
+- The function of fz is pretty much like what it is of
+    [z](https://github.com/rupa/z).
     `-c` restricts the search base starting from current working directory.
     Check z’s doc for more information.
 
