@@ -1,8 +1,8 @@
 # fz
 
-A shell plugin that has fuzzy search tab completion,
+A shell plugin that seamlessly adds fuzzy search tab completion feature to z,
 lets you easy to jump around among your historical directories.
-Currently supports Bash and zsh.
+Not any additional key binding is needed. Currently supports Bash and zsh.
 
 * [Demo](#demo)
 * [Installation](#installation)
