@@ -16,7 +16,7 @@
 
 ## 展示
 
-請[至此](https://youtu.be/YRJrAUz0MiU)觀賞示範影片。
+請[至此](http://www.tudou.com/programs/view/eO0ljcrQfbk/)觀賞示範影片。
 
 ![示意圖](fz-demo.gif)
 
