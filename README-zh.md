@@ -1,6 +1,6 @@
 # fz
 
-無縫接軌地為 [z](https://github.com/rupa/z) 的 tab 自動完成加上模糊搜尋功能，不需再綁定其他熱鍵。使用者可以透過此程式在歷史目錄清單中自由跳躍。支援 Bash 與 zsh。
+完全不須再綁定其他熱鍵，fz 無縫接軌地為 [z](https://github.com/rupa/z) 的 tab 自動完成加上模糊搜尋功能。使用者可以透過此程式在歷史目錄中自由跳躍。支援 Bash 與 zsh。
 
 * [展示](#展示)
 * [安裝程序](#安裝程序)
@@ -22,7 +22,7 @@
 
 ## 安裝程序
 
-由 shell 中 source 對應的程式檔案即可使用。但因本程式仰賴 [z](https://github.com/rupa/z) 與 [fzf](https://github.com/junegunn/fzf)，故此二者也需要一併安裝至系統中。
+由 shell 中 source 對應的程式檔案即可使用。但因本程式仰仗 [z](https://github.com/rupa/z) 與 [fzf](https://github.com/junegunn/fzf)，故此二者亦須一併安裝至系統中。
 
 ### macOS
 
@@ -116,14 +116,14 @@
 
 ## 使用說明
 
-- `tab`/`shift-tab`、`ctrl-n`/`ctrl-p`、`ctrl-j`/`ctrl-k` 選擇下一個、上一個選項。`Enter` 選擇。
-- 程式的功能與 [z](https://github.com/rupa/z) 雷同。`-c` 限制搜尋範圍為當前目錄及子目錄。
+- `tab`/`shift-tab`、`ctrl-n`/`ctrl-p`、`ctrl-j`/`ctrl-k` 選擇下一個、上一個選項。`Enter` 確定。
+- 程式的功能與 [z](https://github.com/rupa/z) 雷同。`-c` 限制搜尋範圍為當前目錄及其子目錄。
 
 ## 相關資訊
 
 - [cdr](https://github.com/willghatch/zsh-cdr) + [zaw](https://github.com/zsh-users/zaw)
-- fzf’s [readme of completion](https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh)
-    and its [wiki](https://github.com/junegunn/fzf/wiki)
+- fzf 的[自動完成說明](https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh)
+    及其[維基頁面](https://github.com/junegunn/fzf/wiki)
 - [fasd](https://github.com/clvv/fasd)
 - [autojump](https://github.com/wting/autojump)
 - [命令行上的narrowing（随着输入逐步减少备选项）工具](http://www.cnblogs.com/bamanzi/p/cli-narrowing-tools.html)
