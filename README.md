@@ -1,6 +1,7 @@
 # fz
 
-A shell plugin that seamlessly adds fuzzy search tab completion feature to z,
+A shell plugin that seamlessly adds fuzzy search tab completion feature to
+[z](https://github.com/rupa/z),
 lets you easy to jump around among your historical directories.
 Not any additional key binding is needed. Currently supports Bash and zsh.
 
