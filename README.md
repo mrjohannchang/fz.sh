@@ -9,6 +9,9 @@ Not any additional key binding is needed. Currently supports Bash and zsh.
    * [macOS](#macos)
       * [Bash](#bash)
       * [zsh](#zsh)
+   * [Ubuntu](#ubuntu)
+      * [Bash](#bash-1)
+      * [zsh](#zsh-1)
 * [Usage](#usage)
 * [See Also](#see-also)
 * [License](#license)
@@ -37,13 +40,13 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 
 2. Download z and fz.
 
-   ```sh
-   mkdir ~/.bash_completion.d
-   curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
-       -o ~/.bash_completion.d/"#1"
-   curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
-       -o ~/.bash_completion.d/"#1"
-   ```
+    ```sh
+    mkdir ~/.bash_completion.d
+    curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
+        -o ~/.bash_completion.d/"#1"
+    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
+        -o ~/.bash_completion.d/"#1"
+    ```
 
 3. Add the following content to `~/.bashrc`:
 
@@ -61,6 +64,54 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 
     ```sh
     brew install fzf
+    ```
+
+2. Install z and fz via [zplug](https://github.com/zplug/zplug).
+    Add the following content to `~/.zshrc`:
+
+    ```sh
+    zplug "rupa/z", use:z.sh
+    zplug "changyuheng/fz"
+    ```
+
+### Ubuntu
+
+#### Bash
+
+1. Install fzf.
+
+    ```sh
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+    ```
+
+2. Download z and fz.
+
+    ```sh
+    mkdir ~/.bash_completion.d
+    curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
+        -o ~/.bash_completion.d/"#1"
+    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
+        -o ~/.bash_completion.d/"#1"
+    ```
+
+3. Add the following content to `~/.bashrc`:
+
+    ```sh
+    if [ -d ~/.bash_completion.d ]; then
+      for file in ~/.bash_completion.d/*; do
+        . $file
+      done
+    fi
+    ```
+
+#### zsh
+
+1. Install fzf.
+
+    ```sh
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
     ```
 
 2. Install z and fz via [zplug](https://github.com/zplug/zplug).
