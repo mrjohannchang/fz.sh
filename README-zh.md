@@ -16,7 +16,7 @@
 
 ## 展示
 
-請[至此](http://www.tudou.com/programs/view/eO0ljcrQfbk/)觀賞示範影片。
+請至 [YouTube](https://youtu.be/YRJrAUz0MiU) 或[土豆](http://www.tudou.com/programs/view/eO0ljcrQfbk/)觀賞示範影片。
 
 ![示意圖](fz-demo.gif)
 
@@ -122,12 +122,11 @@
 ## 相關資訊
 
 - [cdr](https://github.com/willghatch/zsh-cdr) + [zaw](https://github.com/zsh-users/zaw)
-- fzf 的[自動完成說明](https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh)
-    及其[維基頁面](https://github.com/junegunn/fzf/wiki)
+- fzf 的[自動完成說明](https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh)及其[維基頁面](https://github.com/junegunn/fzf/wiki)
 - [fasd](https://github.com/clvv/fasd)
 - [autojump](https://github.com/wting/autojump)
 - [命令行上的narrowing（随着输入逐步减少备选项）工具](http://www.cnblogs.com/bamanzi/p/cli-narrowing-tools.html)
 
 ## 授權條款
 
-本軟體以 [MIT 授權條款](LICENSE) 授權。
+本軟體以 [MIT 授權條款](LICENSE)授權。
