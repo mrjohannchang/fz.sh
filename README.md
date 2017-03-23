@@ -36,7 +36,7 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 1. Install fzf via [Homebrew](https://brew.sh/).
 
     ```sh
-    brew install fzf
+    brew install findutils fzf
     ```
 
 2. Download z and fz.
@@ -64,7 +64,7 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 1. Install fzf via [Homebrew](https://brew.sh/).
 
     ```sh
-    brew install fzf
+    brew install findutils fzf
     ```
 
 2. Install z and fz via [zplug](https://github.com/zplug/zplug).
