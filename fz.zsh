@@ -12,12 +12,12 @@ __fz_matched_history_list() {
 __fz_matched_subdir_list() {
   local dir seg starts_with_dir
   if [[ "$1" == */ ]]; then
-    dir="${(Q)1}"
+    dir="${1}"
     find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
       2>/dev/null
   else
-    dir=$(dirname "${(Q)1}")
-    seg=$(basename "${(Q)1}")
+    dir=$(dirname "${1}")
+    seg=$(basename "${1}")
     starts_with_dir=$( \
       find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
       2>/dev/null | while read -r line; do \
@@ -41,6 +41,9 @@ __fz_matched_subdir_list() {
 _fz_list_generator() {
   local l=$(__fz_matched_history_list "$@")
   if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
+    if [ "$1" = "-c" ]; then
+      shift
+    fi
     l="$l
 $(__fz_matched_subdir_list "$@")"
   fi
@@ -92,7 +95,7 @@ fz-completion() {
 
   if [[ "$LBUFFER" =~ "^\ *fz$" ]]; then
     zle ${__fz_default_completion:-expand-or-complete}
-  elif [[ "$LBUFFER" =~ "^\ +fz\ +-c$" ]]; then
+  elif [[ "$LBUFFER" =~ "^\ *fz\ +-c$" ]]; then
     LBUFFER="$LBUFFER "
     zle redisplay
     typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -115,7 +118,7 @@ fz-completion() {
 }
 
 fz() {
-  if [ "$(__fz_z_list "$@" 2>/dev/null | wc -l)" -gt 0 ]; then
+  if [ "$(_z -l "$@" 2>/dev/null | wc -l)" -gt 0 ]; then
     _z "$@"
   else
     if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
