@@ -118,7 +118,7 @@ fz-completion() {
 }
 
 fz() {
-  if [ "$(_z -l "$@" 2>/dev/null | wc -l)" -gt 0 ]; then
+  if [ "$(_z -l "$@" 2>&1 | wc -l)" -gt 0 ]; then
     _z "$@"
   else
     if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
