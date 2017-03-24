@@ -1,14 +1,50 @@
 #!/usr/bin/env zsh
 
-SCRIPT_DIR=$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
+__fz_fzf_prog() {
+  [ -n "$TMUX_PANE" ] && [ "${FZF_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ] \
+    && echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+}
 
-source "$SCRIPT_DIR/fz.sh"
+__fz_matched_history_list() {
+  _z -l $@ 2>&1 | sed '/^common/ d' | sed '1!G;h;$!d' | cut -b 12-
+}
+
+__fz_matched_subdir_list() {
+  local dir seg starts_with_dir
+  if [[ "$1" == */ ]]; then
+    dir="${(Q)1}"
+    find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
+      2>/dev/null
+  else
+    dir=$(dirname "${(Q)1}")
+    seg=$(basename "${(Q)1}")
+    starts_with_dir=$( \
+      find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
+      2>/dev/null | while read -r line; do \
+        if [[ "${line##*/}" = "$seg"* ]]; then
+          echo "$line"
+        fi
+      done
+    )
+    if [ -n "$starts_with_dir" ]; then
+      echo "$starts_with_dir"
+    else
+      echo "$starts_with_dir" | while read -r line; do \
+        if [[ "${line##*/}" = *"$seg"* ]]; then
+          echo "$line"
+        fi
+      done
+    fi
+  fi
+}
 
 _fz_list_generator() {
-  __fz_matched_history_list $@
+  local l=$(__fz_matched_history_list "$@")
   if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
-    __fz_matched_subdir_list $@
+    l="$l
+$(__fz_matched_subdir_list "$@")"
   fi
+  echo "$l" | sed '/^$/d' | awk '!seen[$0]++'
 }
 
 _fz_complete() {
@@ -42,7 +78,7 @@ _fz_complete() {
     if [[ "${tokens[2]}" == "-c" ]]; then
       LBUFFER="$LBUFFER ${tokens[2]}"
     fi
-    LBUFFER="$LBUFFER $matches"
+    LBUFFER="$LBUFFER $matches/"
   fi
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
