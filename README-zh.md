@@ -120,7 +120,7 @@
 
 - `tab`/`shift-tab`、`ctrl-n`/`ctrl-p`、`ctrl-j`/`ctrl-k` 選擇下一個、上一個選項。`Enter` 確定。
 - 程式的功能與 [z](https://github.com/rupa/z) 雷同。`-c` 限制搜尋範圍為當前目錄及其子目錄。
-- 設定環境變數 `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` 開啟子目錄補完功能
+- 設定環境變數 `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` 開啟子目錄補完功能。目前只支援 zsh。
 
 ## 相關資訊
 
