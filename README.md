@@ -133,6 +133,8 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
     [z](https://github.com/rupa/z).
     `-c` restricts the search base starting from current working directory.
     Check z’s doc for more information.
+- Set environment variable `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` to enable
+    subdirectory completion. (Currently only supports zsh.)
 
 ## See Also
 
