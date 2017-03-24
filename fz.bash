@@ -7,10 +7,19 @@ __fz_fzf_complete() {
     echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
 }
 
+__fz_z_list() {
+  _z -l "$@" 2>&1 | sed '/^common/ d' | sed '1!G;h;$!d' | cut -b 12-
+}
+
 _fz_default_list_generator() {
   # filter out line starting with common -> reverse order
   #   -> print second column only
   _z -l "$@" 2>&1 | sed '/^common/ d' | sed '1!G;h;$!d' | cut -b 12-
+
+  if [ "$1" = "-c" -a -n "$2" ] || [ "${DIR:0:1}" != "/" ]; then
+    find . -type d -name
+  else
+  fi
 }
 
 _fz_complete() {
@@ -50,7 +59,13 @@ _fz_complete() {
 }
 
 fz() {
-  "$FZ_JUMP_PROG" "$@" 2>&1
+  if [ "$(__fz_z_list "$@" 2>/dev/null | wc -l)" -gt 0 ]; then
+    "$FZ_JUMP_PROG" "$@"
+  else
+    if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
+      cd "$@" 2>/dev/null
+    fi
+  fi
 }
 
 complete -F _fz_complete -o nospace fz
