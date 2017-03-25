@@ -99,7 +99,7 @@ fz-completion() {
     LBUFFER="$LBUFFER "
     zle redisplay
     typeset -f zle-line-init >/dev/null && zle zle-line-init
-  elif [ $cmd = fz ]; then
+  elif [ "$cmd" = fz ]; then
     _fz_complete ${tokens[2,${#tokens}]/#\~/$HOME}
   else
     zle ${__fz_default_completion:-expand-or-complete}
