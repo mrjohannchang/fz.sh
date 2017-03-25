@@ -14,14 +14,24 @@ __fz_matched_subdir_list() {
   if [[ "$1" == */ ]]; then
     dir="${1}"
     find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
-      2>/dev/null
+        2>/dev/null | while read -r line; do
+      base="${line##*/}"
+      if [[ "${base[1]}" == "." ]]; then
+        continue
+      fi
+      echo "$line"
+    done
   else
     dir=$(dirname "${1}")
     seg=$(basename "${1}")
     starts_with_dir=$( \
       find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 \
           -type d 2>/dev/null | while read -r line; do \
-        if [[ "${line##*/}" == "$seg"* ]]; then
+        base="${line##*/}"
+        if [[ "${seg[1]}" != "." && "${base[1]}" == "." ]]; then
+          continue
+        fi
+        if [[ "$base" == "$seg"* ]]; then
           echo "$line"
         fi
       done
@@ -31,7 +41,11 @@ __fz_matched_subdir_list() {
     else
       find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 \
           -type d 2>/dev/null | while read -r line; do \
-        if [[ "${line##*/}" == *"$seg"* ]]; then
+        base="${line##*/}"
+        if [[ "${seg[1]}" != "." && "${base[1]}" == "." ]]; then
+          continue
+        fi
+        if [[ "$base" == *"$seg"* ]]; then
           echo "$line"
         fi
       done
