@@ -73,6 +73,9 @@ _fz_complete() {
   l=$(_fz_list_generator $@)
 
   if [ -z "$l" ]; then
+    if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
+      zle ${__fz_default_completion:-expand-or-complete}
+    fi
     return
   fi
 
