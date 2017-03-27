@@ -31,7 +31,7 @@
 1. 經由 [Homebrew](https://brew.sh/) 安裝 fzf：
 
     ```sh
-    brew install findutils fzf
+    brew install fzf
     ```
 
 2. 下載 z 與 fz：
@@ -59,7 +59,7 @@
 1. 經由 [Homebrew](https://brew.sh/) 安裝 fzf：
 
     ```sh
-    brew install findutils fzf
+    brew install fzf
     ```
 
 2. 透過 [zplug](https://github.com/zplug/zplug) 部署 z 與 fz。將以下資訊加入 `~/.zshrc`：
