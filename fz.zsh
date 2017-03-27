@@ -54,7 +54,8 @@ __fz_matched_subdir_list() {
 }
 
 _fz_list_generator() {
-  local l=$(__fz_matched_history_list "$@")
+  local l
+  l=$(__fz_matched_history_list "$@")
   if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
     if [ "$1" = "-c" ]; then
       shift
@@ -67,15 +68,15 @@ $(__fz_matched_subdir_list "$@")"
 
 _fz_complete() {
   setopt localoptions nonomatch
+  local l matches fzf tokens
 
-  local l=$(_fz_list_generator $@)
+  l=$(_fz_list_generator $@)
 
   if [ -z "$l" ]; then
     return
   fi
 
-  local matches
-  local fzf=$(__fz_fzf_prog)
+  fzf=$(__fz_fzf_prog)
 
   if [ $(echo $l | wc -l) -eq 1 ]; then
     matches=${(q)l}
@@ -91,7 +92,7 @@ _fz_complete() {
 
   matches=${matches% }
   if [ -n "$matches" ]; then
-    local tokens=(${(z)LBUFFER})
+    tokens=(${(z)LBUFFER})
     LBUFFER=${tokens[1]}
     if [[ "${tokens[2]}" == "-c" ]]; then
       LBUFFER="$LBUFFER ${tokens[2]}"
@@ -104,9 +105,10 @@ _fz_complete() {
 
 fz-completion() {
   setopt localoptions noshwordsplit noksh_arrays noposixbuiltins
+  local tokens cmd
 
-  local tokens=(${(z)LBUFFER})
-  local cmd=${tokens[1]}
+  tokens=(${(z)LBUFFER})
+  cmd=${tokens[1]}
 
   if [[ "$LBUFFER" =~ "^\ *fz$" ]]; then
     zle ${__fz_default_completion:-expand-or-complete}
@@ -133,12 +135,13 @@ fz-completion() {
 }
 
 fz() {
+  local rc
   if [ "$(_z -l "$@" 2>&1 | wc -l)" -gt 0 ]; then
     _z "$@"
   else
     if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" -eq 1 ]; then
       err=$(cd "${@[-1]}" 2>&1)
-      local rc=$?
+      rc=$?
       if ! cd "${@[-1]}" 2>/dev/null; then
         echo ${err#* } >&2
         return $rc
