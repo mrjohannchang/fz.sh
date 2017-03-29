@@ -54,42 +54,53 @@ __fz_matched_subdir_list() {
 }
 
 _fz_list_generator() {
-  local l
-  l=$(__fz_matched_history_list "$@")
+  local l args slug NEWLINE
+  args="$1"
+  slug="$2"
+  NEWLINE=$'\n'
+  if [ "$1" = "$2" ]; then
+    args=""
+  fi
+  if [ -n "$args" ]; then
+    l=$(__fz_matched_history_list $args "$slug")
+  else
+    l=$(__fz_matched_history_list "$slug")
+  fi
   if [ "$FZ_SUB_DIR_TRAVERSAL_ENABLED" = 1 ]; then
-    if [ "$1" = "-c" ]; then
-      shift
-    fi
-    l="$l
-$(__fz_matched_subdir_list "$@")"
+    l="${l}${NEWLINE}
+$(__fz_matched_subdir_list "$slug")"
   fi
   echo "$l" | sed '/^$/d' | awk '!seen[$0]++'
 }
 
 _fz_complete() {
   COMPREPLY=()
-  local l fzf selected
-
-  l=$(_fz_list_generator "$@")
+  local l fzf selected args slug
 
   if [[ -z "${COMP_WORDS[COMP_CWORD]}" \
       && ! "${COMP_WORDS[@]}" =~ ^\ *fz\ +$ ]]; then
     return
   fi
 
-  local line="${COMP_WORDS[@]:1}"
-  line="${line/#\~/$HOME}"
+  args="${COMP_WORDS[@]:1}"
+  slug="${COMP_WORDS[@]:(-1)}"
 
-  if [ -z "$(_fz_list_generator $line)" ]; then
+  if [[ "$args" == "$slug" ]] && [[ "$slug" == "-c" || "$slug" == "-" ]]; then
+    COMPREPLY=( "-c " )
+    return
+  fi
+
+  eval "slug=$slug"
+  if [ -z "$(_fz_list_generator "$args" "$slug")" ]; then
     return
   fi
 
   fzf=$(__fz_fzf_prog)
 
-  if [ "$(_fz_list_generator $line | wc -l)" -eq 1 ]; then
-    selected=$(_fz_list_generator $line)
+  if [ "$(_fz_list_generator "$args" "$slug" | wc -l)" -eq 1 ]; then
+    selected=$(_fz_list_generator "$args" "$slug")
   else
-    selected=$(_fz_list_generator $line \
+    selected=$(_fz_list_generator "$args" "$slug" \
       | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} \
         --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS \
         --bind 'shift-tab:up,tab:down'" $fzf)
@@ -97,7 +108,7 @@ _fz_complete() {
   printf '\e[5n'
 
   if [ -n "$selected" ]; then
-    COMPREPLY=( "$selected"/ )
+    COMPREPLY=( "$(printf %q "$selected")/" )
     return 0
   fi
 }
