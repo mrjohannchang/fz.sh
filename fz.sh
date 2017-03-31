@@ -90,8 +90,8 @@ __fz_generate_matched_history_list() {
   _z -l $@ 2>&1 | while read -r line; do
     if [[ "$line" == common:* ]]; then continue; fi
     # Reverse the order and cut off the scores
-    echo "$line" | sed '1!G;h;$!d' | cut -b 12-
-  done
+    echo "$line"
+  done | sed '1!G;h;$!d' | cut -b 12-
 }
 
 __fz_generate_matched_subdir_history_list() {
@@ -133,8 +133,8 @@ __fz_bash_completion() {
 
   if [[ "$(__fz_generate_matches "$slug" | wc -l)" -gt 1 ]]; then
     selected=$(__fz_generate_matches "$slug" \
-      | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} \
-      --reverse --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf)
+      | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse \
+      --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf)
   elif [[ "$(__fz_generate_matches "$slug" | wc -l)" -eq 1 ]]; then
     selected=$(__fz_generate_matches "$slug")
   else
@@ -172,8 +172,8 @@ __fz_zsh_completion() {
 
   if [[ "$(__fz_generate_matches "$slug" | wc -l)" -gt 1 ]]; then
     selected=$(__fz_generate_matches "$slug" \
-      | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} \
-      --reverse --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf)
+      | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse \
+      --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf)
   elif [[ "$(__fz_generate_matches "$slug" | wc -l)" -eq 1 ]]; then
     selected=$(__fz_generate_matches "$slug")
   else
