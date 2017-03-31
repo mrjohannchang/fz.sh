@@ -40,8 +40,8 @@
     mkdir ~/.bash_completion.d
     curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
         -o ~/.bash_completion.d/"#1"
-    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
-        -o ~/.bash_completion.d/"#1"
+    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.sh}" \
+        -o ~/.bash_completion.d/z"#1"
     ```
 
 3. 在 `~/.bashrc` 中加入以下資訊：
@@ -86,8 +86,8 @@
     mkdir ~/.bash_completion.d
     curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
         -o ~/.bash_completion.d/"#1"
-    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
-        -o ~/.bash_completion.d/"#1"
+    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.sh}" \
+        -o ~/.bash_completion.d/z"#1"
     ```
 
 3. 在 `~/.bashrc` 中加入以下資訊：
@@ -118,9 +118,19 @@
 
 ## 使用說明
 
+```
+z [dir name slug]<TAB>
+zz [dir name slug]<TAB>
+```
+
+- 程式的功能與 [z](https://github.com/rupa/z) 雷同。`zz` 指令限制搜尋範圍為當前目錄及其子目錄。
 - `tab`/`shift-tab`、`ctrl-n`/`ctrl-p`、`ctrl-j`/`ctrl-k` 選擇下一個、上一個選項。`Enter` 確定。
-- 程式的功能與 [z](https://github.com/rupa/z) 雷同。`-c` 限制搜尋範圍為當前目錄及其子目錄。
-- 設定環境變數 `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` 開啟子目錄補完功能。
+- `FZ_CMD=z` 指定指令名稱。預設為 `z`。
+- `FZ_SUBDIR_CMD=zz` 指定指令名稱。預設為 `zz`。
+- `FZ_SUBDIR_TRAVERSAL=0` 關閉子目錄補完。預設為開啟。
+- `FZ_CASE_INSENSITIVE=0` 關閉子目錄補完不限大小寫。預設為開啟。
+
+注意：`fz` 需在 `z` 之後 source。
 
 ## 相關資訊
 

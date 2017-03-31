@@ -45,8 +45,8 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
     mkdir ~/.bash_completion.d
     curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
         -o ~/.bash_completion.d/"#1"
-    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
-        -o ~/.bash_completion.d/"#1"
+    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.sh}" \
+        -o ~/.bash_completion.d/z"#1"
     ```
 
 3. Add the following content to `~/.bashrc`:
@@ -92,8 +92,8 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
     mkdir ~/.bash_completion.d
     curl "https://raw.githubusercontent.com/rupa/z/master/{z.sh}" \
         -o ~/.bash_completion.d/"#1"
-    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.bash}" \
-        -o ~/.bash_completion.d/"#1"
+    curl "https://raw.githubusercontent.com/changyuheng/fz/master/{fz.sh}" \
+        -o ~/.bash_completion.d/z"#1"
     ```
 
 3. Add the following content to `~/.bashrc`:
@@ -125,16 +125,28 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 
 ## Usage
 
+```
+z [dir name slug]<TAB>
+zz [dir name slug]<TAB>
+```
+
+- The function of fz is pretty much like what it is of
+    [z](https://github.com/rupa/z).
+    `zz` restricts the search base starting from current working directory.
+    Check z’s doc for more information.
 - `tab`/`shift-tab`, `ctrl-n`/`ctrl-p`, `ctrl-j`/`ctrl-k`,
     for next and previous item. `Enter` for selection.
     Check fzf’s [doc](https://github.com/junegunn/fzf#search-syntax)
     for the search syntaxes.
-- The function of fz is pretty much like what it is of
-    [z](https://github.com/rupa/z).
-    `-c` restricts the search base starting from current working directory.
-    Check z’s doc for more information.
-- Set environment variable `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` to enable
-    subdirectory completion.
+- `FZ_CMD=z` specifies command name of `fz`. Default is `z`.
+- `FZ_SUBDIR_CMD=zz` specifies command name for subdirectory only `z`.
+    Default is `zz`.
+- `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` disables subdirectory completion.
+    Default is enabled.
+- `FZ_CASE_INSENSITIVE=0` disables case-insensitive subdirectory completion.
+    Default is enabled.
+
+N.B. `fz` needs to be sourced after `z`.
 
 ## See Also
 
