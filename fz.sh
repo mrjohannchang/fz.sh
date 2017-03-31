@@ -167,7 +167,7 @@ __fz_zsh_completion() {
   fi
 
   if [[ "${#args}" -gt 1 ]]; then
-    slug=${(Q)args[-1]}
+    eval "slug=${args[-1]}"
   fi
 
   if [[ "$(__fz_generate_matches "$slug" | wc -l)" -gt 1 ]]; then
