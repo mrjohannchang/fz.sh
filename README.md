@@ -132,7 +132,7 @@ zz [dir name slug]<TAB>
 
 - The function of fz is pretty much like what it is of
     [z](https://github.com/rupa/z).
-    `zz` restricts the search base starting from current working directory.
+    `zz` limits the search base starting from current working directory.
     Check z’s doc for more information.
 - `tab`/`shift-tab`, `ctrl-n`/`ctrl-p`, `ctrl-j`/`ctrl-k`,
     for next and previous item. `Enter` for selection.

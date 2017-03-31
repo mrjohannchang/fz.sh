@@ -160,11 +160,11 @@ __fz_bash_completion() {
   local selected slug
   eval "slug=${COMP_WORDS[@]:(-1)}"
 
-  if [[ "$(__fz_generate_matches "$slug" | wc -l)" -gt 1 ]]; then
+  if [[ "$(__fz_generate_matches "$slug" | head | wc -l)" -gt 1 ]]; then
     selected=$(__fz_generate_matches "$slug" \
       | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse \
       --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf)
-  elif [[ "$(__fz_generate_matches "$slug" | wc -l)" -eq 1 ]]; then
+  elif [[ "$(__fz_generate_matches "$slug" | head | wc -l)" -eq 1 ]]; then
     selected=$(__fz_generate_matches "$slug")
   else
     return
@@ -205,11 +205,11 @@ __fz_zsh_completion() {
     eval "slug=${args[-1]}"
   fi
 
-  if [[ "$(__fz_generate_matches "$slug" | wc -l)" -gt 1 ]]; then
+  if [[ "$(__fz_generate_matches "$slug" | head | wc -l)" -gt 1 ]]; then
     selected=$(__fz_generate_matches "$slug" \
       | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse \
       --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf)
-  elif [[ "$(__fz_generate_matches "$slug" | wc -l)" -eq 1 ]]; then
+  elif [[ "$(__fz_generate_matches "$slug" | head | wc -l)" -eq 1 ]]; then
     selected=$(__fz_generate_matches "$slug")
   else
     return
@@ -260,7 +260,7 @@ __fz_init_zsh_completion() {
 
 _fz() {
   local rc
-  if [[ "$($FZ_HISTORY_LIST_GENERATOR "$@" | wc -l)" -gt 0 ]]; then
+  if [[ "$($FZ_HISTORY_LIST_GENERATOR "$@" | head | wc -l)" -gt 0 ]]; then
     "$FZ_HISTORY_CD_CMD" "$@"
   elif [[ "$FZ_SUBDIR_TRAVERSAL" -ne 0 ]]; then
     err=$(cd "${@: -1}" 2>&1)
@@ -274,7 +274,7 @@ _fz() {
 
 _fzz() {
   local rc
-  if [[ "$($FZ_SUBDIR_HISTORY_LIST_GENERATOR "$@" | wc -l)" -gt 0 ]]; then
+  if [[ "$($FZ_SUBDIR_HISTORY_LIST_GENERATOR "$@" | head | wc -l)" -gt 0 ]]; then
     if [[ -n "$BASH_VERSION" ]]; then
       $FZ_SUBDIR_HISTORY_CD_CMD "$@"
     elif [[ -n "$ZSH_VERSION" ]]; then
