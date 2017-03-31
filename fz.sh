@@ -11,6 +11,7 @@
 
 [[ -n "$FZ_SUBDIR_TRAVERSAL" ]] || FZ_SUBDIR_TRAVERSAL=1
 [[ -n "$FZ_CASE_INSENSITIVE" ]] || FZ_CASE_INSENSITIVE=1
+[[ -n "$FZ_ABBREVIATE_HOME" ]] || FZ_ABBREVIATE_HOME=1
 
 alias ${FZ_CMD}='_fz'
 alias ${FZ_SUBDIR_CMD}='_fzz'
@@ -110,19 +111,47 @@ __fz_generate_matches() {
   fi
 
   if [[ "$cmd" == "$FZ_CMD" ]]; then
-    histories=$("$FZ_HISTORY_LIST_GENERATOR" "$@")
+    if [[ "$FZ_ABBREVIATE_HOME" == "1" ]]; then
+      if [ "$FZ_SUBDIR_TRAVERSAL" == "1" ]; then
+        cat <("$FZ_HISTORY_LIST_GENERATOR" "$@") \
+          <(__fz_generate_matched_subdir_list "$@") \
+          | sed '/^$/d' | sed -e "s,^$HOME,~," | awk '!seen[$0]++'
+      else
+        cat <("$FZ_HISTORY_LIST_GENERATOR" "$@") \
+          | sed '/^$/d' | sed -e "s,^$HOME,~," | awk '!seen[$0]++'
+      fi
+    else
+      if [ "$FZ_SUBDIR_TRAVERSAL" == "1" ]; then
+        cat <("$FZ_HISTORY_LIST_GENERATOR" "$@") \
+          <(__fz_generate_matched_subdir_list "$@") \
+          | sed '/^$/d' | awk '!seen[$0]++'
+      else
+        cat <("$FZ_HISTORY_LIST_GENERATOR" "$@") \
+          | sed '/^$/d' | awk '!seen[$0]++'
+      fi
+    fi
   elif [[ "$cmd" == "$FZ_SUBDIR_CMD" ]]; then
     histories=$("$FZ_SUBDIR_HISTORY_LIST_GENERATOR" "$@")
+    if [[ "$FZ_ABBREVIATE_HOME" == "1" ]]; then
+      if [ "$FZ_SUBDIR_TRAVERSAL" == "1" ]; then
+        cat <("$FZ_SUBDIR_HISTORY_LIST_GENERATOR" "$@") \
+          <(__fz_generate_matched_subdir_list "$@") \
+          | sed '/^$/d' | sed -e "s,^$HOME,~," | awk '!seen[$0]++'
+      else
+        cat <("$FZ_SUBDIR_HISTORY_LIST_GENERATOR" "$@") \
+          | sed '/^$/d' | sed -e "s,^$HOME,~," | awk '!seen[$0]++'
+      fi
+    else
+      if [ "$FZ_SUBDIR_TRAVERSAL" == "1" ]; then
+        cat <("$FZ_SUBDIR_HISTORY_LIST_GENERATOR" "$@") \
+          <(__fz_generate_matched_subdir_list "$@") \
+          | sed '/^$/d' | awk '!seen[$0]++'
+      else
+        cat <("$FZ_SUBDIR_HISTORY_LIST_GENERATOR" "$@") \
+          | sed '/^$/d' | awk '!seen[$0]++'
+      fi
+    fi
   fi
-
-  if [ "$FZ_SUBDIR_TRAVERSAL" == "1" ]; then
-    subdirs=$(__fz_generate_matched_subdir_list "$@")
-  fi
-
-  cat << EOF | sed '/^$/d' | awk '!seen[$0]++'
-$histories
-$subdirs
-EOF
 }
 
 __fz_bash_completion() {
@@ -142,9 +171,15 @@ __fz_bash_completion() {
   fi
 
   if [[ -n "$selected" ]]; then
+    if [[ "$FZ_ABBREVIATE_HOME" == "1" ]]; then
+      selected=${selected/#\~/$HOME}
+    fi
     selected=$(printf %q "$selected")
     if [[ "$selected" != */ ]]; then
       selected="${selected}/"
+    fi
+    if [[ "$FZ_ABBREVIATE_HOME" == "1" ]]; then
+      selected=${selected/#$HOME/\~}
     fi
     COMPREPLY=( "$selected" )
   fi
@@ -181,9 +216,15 @@ __fz_zsh_completion() {
   fi
 
   if [[ -n "$selected" ]]; then
+    if [[ "$FZ_ABBREVIATE_HOME" == "1" ]]; then
+      selected=${selected/#\~/$HOME}
+    fi
     selected="${(q)selected}"
     if [[ "$selected" != */ ]]; then
       selected="${selected}/"
+    fi
+    if [[ "$FZ_ABBREVIATE_HOME" == "1" ]]; then
+      selected=${selected/#$HOME/\~}
     fi
     LBUFFER="$cmd $selected"
   fi

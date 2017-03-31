@@ -141,10 +141,11 @@ zz [dir name slug]<TAB>
 - `FZ_CMD=z` specifies command name of `fz`. Default is `z`.
 - `FZ_SUBDIR_CMD=zz` specifies command name for subdirectory only `z`.
     Default is `zz`.
-- `FZ_SUB_DIR_TRAVERSAL_ENABLED=1` disables subdirectory completion.
+- `FZ_SUBDIR_TRAVERSAL=0` disables subdirectory completion.
     Default is enabled.
 - `FZ_CASE_INSENSITIVE=0` disables case-insensitive subdirectory completion.
     Default is enabled.
+- `FZ_ABBREVIATE_HOME=0` disables abbreviating `~`.  Default is enabled.
 
 N.B. `fz` needs to be sourced after `z`.
 

@@ -129,6 +129,7 @@ zz [dir name slug]<TAB>
 - `FZ_SUBDIR_CMD=zz` 指定指令名稱。預設為 `zz`。
 - `FZ_SUBDIR_TRAVERSAL=0` 關閉子目錄補完。預設為開啟。
 - `FZ_CASE_INSENSITIVE=0` 關閉子目錄補完不限大小寫。預設為開啟。
+- `FZ_ABBREVIATE_HOME=0` 不展開 `~` 變數。預設為展開。
 
 注意：`fz` 需在 `z` 之後 source。
 
