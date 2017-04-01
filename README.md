@@ -19,8 +19,6 @@ Not any additional key binding is needed. Currently supports Bash and zsh.
 
 ## Demo
 
-Watch video demo [here](https://youtu.be/YRJrAUz0MiU).
-
 ![gif-demo](fz-demo.gif)
 
 ## Installation

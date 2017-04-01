@@ -16,8 +16,6 @@
 
 ## 展示
 
-請至 [YouTube](https://youtu.be/YRJrAUz0MiU) 或[土豆](http://www.tudou.com/programs/view/eO0ljcrQfbk/)觀賞示範影片。
-
 ![示意圖](fz-demo.gif)
 
 ## 安裝程序
