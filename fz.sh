@@ -197,7 +197,7 @@ __fz_zsh_completion() {
   if [[ "$cmd" != "$FZ_CMD" && "$cmd" != "$FZ_SUBDIR_CMD" ]] \
       || [[ "$cmd" == "$FZ_CMD" && "$LBUFFER" =~ "^\s*$FZ_CMD$" ]] \
       || [[ "$cmd" == "$FZ_SUBDIR_CMD" && "$LBUFFER" =~ "^\s*$FZ_SUBDIR_CMD$" ]]; then
-    zle ${__fz_default_completion:-expand-or-complete}
+    zle ${__fz_zsh_default_completion:-expand-or-complete}
     return
   fi
 
@@ -242,18 +242,18 @@ __fz_init_bash_completion() {
 }
 
 __fz_init_zsh_completion() {
-  # [ -n "$__fz_zsh_default_completion" ] || {
-    # binding=$(bindkey '^I')
-    # # $binding[(s: :w)2]
-    # # The command substitution and following word splitting to determine the
-    # # default zle widget for ^I formerly only works if the IFS parameter contains
-    # # a space via $binding[(w)2]. Now it specifically splits at spaces, regardless
-    # # of IFS.
-    # # It’s not compatitable with bash so use awk instead.
-    # [[ $binding =~ 'undefined-key' ]] \
-      # || __fz_zsh_default_completion=$(echo "$binding" | awk '{print $2}')
-    # unset binding
-  # }
+  [ -n "$__fz_zsh_default_completion" ] || {
+    binding=$(bindkey '^I')
+    # $binding[(s: :w)2]
+    # The command substitution and following word splitting to determine the
+    # default zle widget for ^I formerly only works if the IFS parameter contains
+    # a space via $binding[(w)2]. Now it specifically splits at spaces, regardless
+    # of IFS.
+    # It’s not compatitable with bash so use awk instead.
+    [[ $binding =~ 'undefined-key' ]] \
+      || __fz_zsh_default_completion=$(echo "$binding" | awk '{print $2}')
+    unset binding
+  }
   zle -N __fz_zsh_completion
   bindkey '^I' __fz_zsh_completion
 }
