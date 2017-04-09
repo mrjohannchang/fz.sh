@@ -69,8 +69,8 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
     Add the following content to `~/.zshrc`:
 
     ```sh
+    zplug "changyuheng/fz", defer:1
     zplug "rupa/z", use:z.sh
-    zplug "changyuheng/fz"
     ```
 
 ### Ubuntu
@@ -117,8 +117,8 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
     Add the following content to `~/.zshrc`:
 
     ```sh
+    zplug "changyuheng/fz", defer:1
     zplug "rupa/z", use:z.sh
-    zplug "changyuheng/fz"
     ```
 
 ## Usage

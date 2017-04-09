@@ -63,8 +63,8 @@
 2. 透過 [zplug](https://github.com/zplug/zplug) 部署 z 與 fz。將以下資訊加入 `~/.zshrc`：
 
     ```sh
+    zplug "changyuheng/fz", defer:1
     zplug "rupa/z", use:z.sh
-    zplug "changyuheng/fz"
     ```
 
 ### Ubuntu
@@ -110,8 +110,8 @@
 2. 透過 [zplug](https://github.com/zplug/zplug) 部署 z 與 fz。將以下資訊加入 `~/.zshrc`：
 
     ```sh
+    zplug "changyuheng/fz", defer:1
     zplug "rupa/z", use:z.sh
-    zplug "changyuheng/fz"
     ```
 
 ## 使用說明
