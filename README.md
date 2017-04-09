@@ -27,6 +27,8 @@ By simply sourcing corresponding script file for your shell, you're all set.
 However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 [fzf](https://github.com/junegunn/fzf), so you must have them installed as well.
 
+N.B. `fz` needs to be sourced after `z`.
+
 ### macOS
 
 #### Bash
@@ -144,8 +146,6 @@ zz [dir name slug]<TAB>
 - `FZ_CASE_INSENSITIVE=0` disables case-insensitive subdirectory completion.
     Default is enabled.
 - `FZ_ABBREVIATE_HOME=0` disables abbreviating `~`.  Default is enabled.
-
-N.B. `fz` needs to be sourced after `z`.
 
 ## See Also
 

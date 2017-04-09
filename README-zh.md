@@ -22,6 +22,8 @@
 
 由 shell 中 source 對應的程式檔案即可使用。但因本程式仰仗 [z](https://github.com/rupa/z) 與 [fzf](https://github.com/junegunn/fzf)，故此二者亦須一併安裝至系統中。
 
+注意：`fz` 需在 `z` 之後 source。
+
 ### macOS
 
 #### Bash
@@ -128,8 +130,6 @@ zz [dir name slug]<TAB>
 - `FZ_SUBDIR_TRAVERSAL=0` 關閉子目錄補完。預設為開啟。
 - `FZ_CASE_INSENSITIVE=0` 關閉子目錄補完不限大小寫。預設為開啟。
 - `FZ_ABBREVIATE_HOME=0` 不展開 `~` 變數。預設為展開。
-
-注意：`fz` 需在 `z` 之後 source。
 
 ## 相關資訊
 
