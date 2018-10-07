@@ -155,7 +155,3 @@ zz [dir name slug]<TAB>
 - [fasd](https://github.com/clvv/fasd)
 - [autojump](https://github.com/wting/autojump)
 - [命令行上的narrowing（随着输入逐步减少备选项）工具](http://www.cnblogs.com/bamanzi/p/cli-narrowing-tools.html)
-
-## License
-
-This software is licensed under a [MIT License](LICENSE).
