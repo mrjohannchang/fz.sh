@@ -235,6 +235,7 @@ __fz_zsh_completion() {
     LBUFFER="$cmd $selected"
   fi
 
+  type _zsh_autosuggest_clear >/dev/null && _zsh_autosuggest_clear
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
 }
