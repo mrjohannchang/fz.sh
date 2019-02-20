@@ -7,10 +7,6 @@
 [[ -n "$FZ_CMD" ]] || FZ_CMD=z
 [[ -n "$FZ_SUBDIR_CMD" ]] || FZ_SUBDIR_CMD=zz
 
-if [[ -z "$FZ_HISTORY_CD_CMD" ]] && command -v _zlua > /dev/null 2>&1; then
-	command -v _z > /dev/null 2>&1 || FZ_HISTORY_CD_CMD="_zlua"
-fi
-
 [[ -n "$FZ_HISTORY_CD_CMD" ]] || FZ_HISTORY_CD_CMD=_z
 [[ -n "$FZ_SUBDIR_HISTORY_CD_CMD" ]] || \
 	FZ_SUBDIR_HISTORY_CD_CMD="$FZ_HISTORY_CD_CMD -c"
