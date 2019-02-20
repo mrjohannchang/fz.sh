@@ -130,6 +130,7 @@ zz [dir name slug]<TAB>
 - `FZ_SUBDIR_TRAVERSAL=0` 關閉子目錄補完。預設為開啟。
 - `FZ_CASE_INSENSITIVE=0` 關閉子目錄補完不限大小寫。預設為開啟。
 - `FZ_ABBREVIATE_HOME=0` 不展開 `~` 變數。預設為展開。
+- `FZ_HISTORY_CD_CMD=_zlua` 同 [z.lua](https://github.com/skywind3000/z.lua) 協同工作。
 
 ## 相關資訊
 
@@ -137,4 +138,5 @@ zz [dir name slug]<TAB>
 - fzf 的[自動完成說明](https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh)及其[維基頁面](https://github.com/junegunn/fzf/wiki)
 - [fasd](https://github.com/clvv/fasd)
 - [autojump](https://github.com/wting/autojump)
+- [z.lua](https://github.com/skywind3000/z.lua)
 - [命令行上的narrowing（随着输入逐步减少备选项）工具](http://www.cnblogs.com/bamanzi/p/cli-narrowing-tools.html)
