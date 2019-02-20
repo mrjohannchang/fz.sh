@@ -7,8 +7,13 @@
 [[ -n "$FZ_CMD" ]] || FZ_CMD=z
 [[ -n "$FZ_SUBDIR_CMD" ]] || FZ_SUBDIR_CMD=zz
 
+if [[ -z "$FZ_HISTORY_CD_CMD" ]] && command -v _zlua > /dev/null 2>&1; then
+	command -v _z > /dev/null 2>&1 || FZ_HISTORY_CD_CMD="_zlua"
+fi
+
 [[ -n "$FZ_HISTORY_CD_CMD" ]] || FZ_HISTORY_CD_CMD=_z
-[[ -n "$FZ_SUBDIR_HISTORY_CD_CMD" ]] || FZ_SUBDIR_HISTORY_CD_CMD="_z -c"
+[[ -n "$FZ_SUBDIR_HISTORY_CD_CMD" ]] || \
+	FZ_SUBDIR_HISTORY_CD_CMD="$FZ_HISTORY_CD_CMD -c"
 
 [[ -n "$FZ_HISTORY_LIST_GENERATOR" ]] \
   || FZ_HISTORY_LIST_GENERATOR=__fz_generate_matched_history_list
@@ -94,7 +99,7 @@ __fz_generate_matched_subdir_list() {
 }
 
 __fz_generate_matched_history_list() {
-  _z -l $@ 2>&1 | while read -r line; do
+  "$FZ_HISTORY_CD_CMD" -l $@ 2>&1 | while read -r line; do
     if [[ "$line" == common:* ]]; then continue; fi
     # Reverse the order and cut off the scores
     echo "$line"
