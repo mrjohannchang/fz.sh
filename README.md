@@ -146,6 +146,7 @@ zz [dir name slug]<TAB>
 - `FZ_CASE_INSENSITIVE=0` disables case-insensitive subdirectory completion.
     Default is enabled.
 - `FZ_ABBREVIATE_HOME=0` disables abbreviating `~`.  Default is enabled.
+- `FZ_HISTORY_CD_CMD=_zlua` works with [z.lua](https://github.com/skywind3000/z.lua).
 
 ## See Also
 
@@ -154,4 +155,5 @@ zz [dir name slug]<TAB>
     and its [wiki](https://github.com/junegunn/fzf/wiki)
 - [fasd](https://github.com/clvv/fasd)
 - [autojump](https://github.com/wting/autojump)
+- [z.lua](https://github.com/skywind3000/z.lua)
 - [命令行上的narrowing（随着输入逐步减少备选项）工具](http://www.cnblogs.com/bamanzi/p/cli-narrowing-tools.html)
