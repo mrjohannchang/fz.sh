@@ -161,9 +161,16 @@ __fz_generate_matches() {
   fi
 }
 
+__fz_fzf_prog() {
+  [ -n "$TMUX_PANE" ] && [ "${FZF_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ] \
+    && echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+}
+
 __fz_filter() {
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse \
-      --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" fzf
+  fzf=$(__fz_fzf_prog)
+
+  FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse \
+    --bind 'shift-tab:up,tab:down' $FZF_DEFAULT_OPTS" ${=fzf}
 }
 
 __fz_bash_completion() {
