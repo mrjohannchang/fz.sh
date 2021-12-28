@@ -1,4 +1,4 @@
-**Since [zoxide](https://github.com/ajeetdsouza/zoxide) covers [fz](https://github.com/changyuheng/fz)'s function, the is repository is archived and will not be maintained anymore.**
+**Since [zoxide](https://github.com/ajeetdsouza/zoxide) covers [fz](https://github.com/changyuheng/fz)'s function, this repository is archived and will not be maintained anymore.**
 
 # fz
 
