@@ -1,5 +1,3 @@
-**Since [zoxide](https://github.com/ajeetdsouza/zoxide) covers [fz](https://github.com/changyuheng/fz)'s function, this repository is archived and will not be maintained anymore.**
-
 # fz
 
 A shell plugin that seamlessly adds fuzzy search to tab completion of
