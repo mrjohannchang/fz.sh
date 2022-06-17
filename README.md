@@ -8,6 +8,7 @@ Not any additional key binding is needed. Currently supports Bash and zsh.
 * [Demo](#demo)
 * [Installation](#installation)
    * [macOS](#macos)
+      * [Fig](#fig)
       * [Bash](#bash)
       * [zsh](#zsh)
    * [Ubuntu](#ubuntu)
@@ -30,6 +31,14 @@ However, this plugin is sitting on top of [z](https://github.com/rupa/z) and
 N.B. `fz` needs to be sourced after `z`.
 
 ### macOS
+
+#### Fig
+
+[Fig](https://fig.io) adds apps, shortcuts, and autocomplete to your existing terminal.
+
+Install `fz` in zsh or bash with one click.
+
+<a href="https://fig.io/plugins/other/fz_changyuheng" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
 
 #### Bash
 
