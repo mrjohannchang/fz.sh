@@ -27,7 +27,7 @@ __fz_generate_matched_subdir_list() {
   local dir seg starts_with_dir
   if [[ "$1" == */ ]]; then
     dir="$1"
-    find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
+    find -L "$(builtin cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 -type d \
         2>/dev/null | while read -r line; do
       base="${line##*/}"
       if [[ "$base" == .* ]]; then
@@ -42,7 +42,7 @@ __fz_generate_matched_subdir_list() {
       seg=$(echo "$seg" | tr '[:upper:]' '[:lower:]')
     fi
     starts_with_dir=$( \
-      find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 \
+      find -L "$(builtin cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 \
           -type d 2>/dev/null | while read -r line; do \
         base="${line##*/}"
         if [[ "$seg" != .* && "$base" == .* ]]; then
@@ -68,7 +68,7 @@ __fz_generate_matched_subdir_list() {
     if [ -n "$starts_with_dir" ]; then
       echo "$starts_with_dir"
     else
-      find -L "$(cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 \
+      find -L "$(builtin cd "$dir" 2>/dev/null && pwd)" -mindepth 1 -maxdepth 1 \
           -type d 2>/dev/null | while read -r line; do \
         base="${line##*/}"
         if [[ "$seg" != .* && "$base" == .* ]]; then
@@ -281,9 +281,9 @@ _fz() {
   if [[ "$($FZ_HISTORY_LIST_GENERATOR "$@" | head | wc -l)" -gt 0 ]]; then
     "$FZ_HISTORY_CD_CMD" "$@"
   elif [[ "$FZ_SUBDIR_TRAVERSAL" -ne 0 ]]; then
-    err=$(cd "${@: -1}" 2>&1)
+    err=$(builtin cd "${@: -1}" 2>&1)
     rc=$?
-    if ! cd "${@: -1}" 2>/dev/null; then
+    if ! builtin cd "${@: -1}" 2>/dev/null; then
       echo ${err#* } >&2
       return $rc
     fi
@@ -299,9 +299,9 @@ _fzz() {
       ${=FZ_SUBDIR_HISTORY_CD_CMD} "$@"
     fi
   elif [[ "$FZ_SUBDIR_TRAVERSAL" -ne 0 ]]; then
-    err=$(cd "${@: -1}" 2>&1)
+    err=$(builtin cd "${@: -1}" 2>&1)
     rc=$?
-    if ! cd "${@: -1}" 2>/dev/null; then
+    if ! builtin cd "${@: -1}" 2>/dev/null; then
       echo ${err#* } >&2
       return $rc
     fi
